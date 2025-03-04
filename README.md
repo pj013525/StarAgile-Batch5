@@ -5,6 +5,20 @@ This repository contains **lecture notes** discussed in our **live classes**. �
 
 ---
 
+## ⭐ **Support This Project**  
+
+If you find these resources helpful, show some ❤️ by **starring** ⭐ this repository!  
+
+👉 **Fork** 🍴 the repo to keep your own copy and experiment with the scripts.  
+👉 **Star** ⭐ the repo to help others discover this valuable resource.  
+👉 **Contribute** 🤝 by submitting improvements or new scripts.  
+
+Every ⭐ **motivates** me to create more awesome content! 🚀  
+
+[![GitHub Repo](https://img.shields.io/badge/Fork%20%26%20Star%20the%20Repo-Click%20Here-brightgreen?style=for-the-badge&logo=github)](https://github.com/KastroVKiran/StarAgileBatch5)
+
+---
+
 ## 🛠 **Tools Covered in This Course**  
 
 | Tool | Description |
@@ -51,6 +65,12 @@ Expand your **DevOps knowledge** with these free resources! 🚀
 
 💬 **Join the DevOps Community for Videos & Job Updates**  
 [![Join WhatsApp Group](https://img.shields.io/badge/-Join%20Now-green?style=for-the-badge&logo=whatsapp)](https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm)
+
+---
+
+## 💬 **Feedback Matters!**  
+After going through the resources, **share your thoughts on LinkedIn** and **tag me** in your post.  
+I’d love to hear how this course helped you! 🚀  
 
 ---
 
