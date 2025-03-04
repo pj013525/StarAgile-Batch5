@@ -5,16 +5,6 @@ This repository contains **lecture notes** discussed in our **live classes**. �
 
 ---
 
-## ⭐ **Support This Project**  
-
-If you find these resources helpful, show some ❤️ by **starring** ⭐ this repository!  
-
-👉 **Fork** 🍴 the repo to keep your own copy and experiment with the scripts.  
-👉 **Star** ⭐ the repo to help others discover this valuable resource.  
-👉 **Contribute** 🤝 by submitting improvements or new scripts.  
-
-Every ⭐ **motivates** me to create more awesome content! 🚀  
-
 [![GitHub Repo](https://img.shields.io/badge/Fork%20%26%20Star%20the%20Repo-Click%20Here-brightgreen?style=for-the-badge&logo=github)](https://github.com/KastroVKiran/StarAgileBatch5)
 
 ---
