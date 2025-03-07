@@ -1,0 +1,185 @@
+										Day 01
+------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------
+Modules
+--------------------
+Linux & Shell Scripting - 3 days
+Introduction to DevOps - 2 days
+DevOps on AWS		- 2 days
+Maven				- 1 day
+Git & GitHub			- 5 days
+Jenkins				- 5 days
+
+5 Real-time Projects
+2 Projects - Assignment
+
+Interview Questions
+
+3+ years experience
+
+Concept - Practicals
+Questions - Chatbox
+
+Notes: https://github.com/KastroVKiran/StarAgile-Batch5.git
+-------------------------------------------------------
+Module 1 - Linux & Shell Scripting
+-------------------------------------------------------
+=> Why we need to learn Linux?
+Linux is commonly used OS in real-time environment
+
+=> What is Linux?
+Linux is an Operating System
+
+=> What is OS?
+OS is a software which is used to communicate with the system/machine.
+It acts as a mediator between user and device.
+It provides an environment to run applications.
+
+=> Types of OS?
+Windows OS
+Mac OS
+Andriod OS
+Linux OS
+
+=> Windows OS Vs. Linux OS
+Windows	- It is single user based OS
+Linux	- It is multi user based OS
+
+Windows	- It is based on GUI (Graphic User Interface)
+Linux	- It is based on CLI (Command Line Interface)
+
+Windows	- It is paid
+Linux	- It is free and open-source s/w
+
+Windows	- Less security
+Linux	- Highly secure
+
+Windows	- It is developed by Microsoft
+Linux	- It is developed by Linus Torvalds
+
+Windows	- It is recommended for personal use
+Linux	- It is for professional use
+
+=> Linux Distributions
+Hyderabad Biryani - Recipe - Hyderabad (Paradise, Bawarchi)
+Bangalore - Hyderabadi Biryani
+
+Linux OS --- Code --- Modified Code --- MyCode1, MyCode2, MyCode3
+Ubuntu, Debian, Suse Linux, Cent OS....
+
+In AWS cloud, most of these distributions are available as Amazon machine Image (AMI)
+1. RPM based
+	- RedHat
+	- Cento OS
+	- Amazon Linux 2
+	- Amazon Linux 2023
+2. Debian based
+	- Suse
+	- Ubuntu
+
+In real-time, we will prefer to work either with Amazon Linux or Ubuntu OS.
+
+=> How we can work with Linux OS?
+AWS Cloud ---- EC2 ---- Launch a Virtual Machine / EC2 Instance
+
+=> How to connect to a VM?
+1. Within the cloud (EC2 instance connect, Sessions Manager...)
+2. MobaXTerm, Putty, Gitbash...
+
+Note: MobaXTerm is preferred throughout the modules
+
+=> Launching a EC2 VM
+MobaXTerm Download URL: https://mobaxterm.mobatek.net/download-home-edition.html
+----------------------------------------------------------------------------
+Linux Commands - Part 1 (Basic Commands)
+----------------------------------------------------------------------------
+clear (or) control + l
+cal
+cal 2025
+cal -3
+cal <1-12> <Year>
+
+In Linux we have 2 types of users;
+1. ec2-user (default)
+2. root
+
+ec2-user Vs. root
+ec2-user doesn't have all permissions to execute specific commands (Installation of a softwares)'
+root user will have all kinds of privileges 
+
+whoami
+sudo su (or) sudo -i
+exit
+
+To know in which path you are currently there
+pwd (Present Working Directory)
+
+In Linux OS, everything is represented as "files"
+.txt, .py, .java, .net.....
+
+How to create files in Linux OS?
+1. touch
+2. cat
+3. vi (or) vim
+
+How to see the list of files available?
+ls (or) ls -l (or) ll
+
+create 5 files, but number should start from 95 and end at 100. 
+.java
+Netflix
+
+touch netflix{95..100}.java
+
+delete a file --- rm
+
+How to work with vi command?
+1. vi <FileName>
+2. Goto the "insert" mode --- press "i"
+3. Write the content
+4. press "esc"
+5. To save and quit --- :wq
+
+history
+date
+
+In Linux we create directories
+mkdir <DirectoryName>
+
+In the beginning of a line, if you see -, then its a file
+In the beginning of a line, if you see d, then its a directory
+
+to go inside a directory
+cd <DirectoryName> --- Change Directory
+
+To delete everything ---- rm -rf *
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
