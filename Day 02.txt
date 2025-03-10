@@ -1,0 +1,209 @@
+														Day 02
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+https://github.com/KastroVKiran/StarAgile-Batch5.git
+
+
+-----------------------------------------------
+Linux File System/Folder Structure
+-----------------------------------------------
+=> In Linux OS everything will be represented as File.
+=> Root Directory (/) is starting point of Linux machine
+=> Inside root directory we have several directories like below
+/home : It contains users home directories
+	/home/kastro : Kastro home directory
+	/home/kiran : Kiran home directory
+	/home/ec2-user : ec2-user home directory
+/bin : Essentials ready-to-run-program (binaries)	
+/boot : static files of boot loader
+/dev : device files
+/lib : Shared libraries
+/etc : host specific configurations
+/opt : Optional application software packages
+/tmp : Temporary files will be stored here
+/usr : user utilities and applications
+/mnt : Mounted File system
+/media : Removal Media
+
+To go to root directory ---> cd / ----> pwd ----> You will see / ---> ls ---> You will see default directory structure
+To go inside a default directory
+$ cd /<DirectoryName>
+
+To check which OS and flavor
+cat /etc/os-release
+
+$ at the end of line represents normal user
+# at the end of line represents root user
+~ at the end inside the [ ] represents home directory
+
+To know about a particular command. We can do that in two ways;
+Ex: man cp (man represents manual) (Here im trying to know about "cp" command)
+Ex: cp --help (Here im trying to know about "cp" command)
+
+To know in which path the commands are available in Linux directory;
+which ls --- you will see the details
+which cp --- you will see the details
+which mv --- you will see the details
+
+To know the Private IP address of VM
+hostname -i
+
+To know the machine name of the VM
+hostname
+
+To set the name of the VM
+hostnamectl set-hostname <GiveNameForTheVM>
+
+To know the machine name of the VM
+hostname
+sudo -i ---> You will see the hostname whatever you have set
+
+To see for how long the VM is running
+uptime
+
+ls -a (or) ls -al : display hidden files
+
+=> FIND Command
+To find the file created. This is used when we dont know where we have created the file
+find /home/ec2-user/ -name <FileName> ---> This command will search for the file in /home/ec2-user/ path.
+But if you dont know the path ---> find / -name <FileName>
+
+=> MOVE Command
+mv : To rename and move files & directories
+		mv <OldDirName> <NewDirName>
+		mv <OldFileName> <NewFileName>
+		mv presention-location new-location
+
+How to copy the content from one file to another file?
+$ cat <File1Name> > <File2Name>
+Note: This command will override the existing content
+
+If you dont want to override the existing content;
+$ cat <File1Name> >> <File2Name>
+$ cat <File1Name> >> <File2Name> <File3Name> <File4Name>
+
+		# print file data from top to bottom
+		cat f1.txt
+
+		# print file data with line numbers
+		cat -n f1.txt		
+
+		To print the line numbers
+		cat -n <FileName>
+
+=> COPY Command
+1. To copy the content of one file to another file: cp
+Create a file with content inside it
+To copy the content of file1 into file2
+cp <File1Name> <File2Name>
+Note: If File2 is not available, first it will create File2 and then it will copy the content from File1 to File2
+To copy the files in directory 1 to directory 2
+cp -r <Dir1Name>/ <Dir2Name>/
+
+Note: If we want to copy data from multiple files then we should use cat command
+		cat f1.txt f2.txt > f3.txt
+
+2. Lets say i want to copy a specific file inside a directory to /home/ec2-user path
+Create a directory
+Go inside directory
+Create a file inside that directory
+Lets copy the file to /home/ec2-user path: cp <FileName> /home/ec2-user
+
+3. To copy the entire content (all files) from directory1 to directory2
+cp -r <Directory1Name>/* <Directory2Name>/
+/* represents whatever is there in that directory everything will get copied
+Steps;
+Create dir1 --- Create 5 files inside it --- Execute the above command to copy --- Go inside dir2, you will see dir1 --- go inside dir1 which is there in dir2 ---- ls --- you will see the files which got copied from dir1
+
+=> WordCount Command
+To know the word count in a file
+$ wc <FileName>
+
+3 12 56 kk.txt
+
+3 ---> Number of lines in the file
+12 ---> Number of words in the file
+56 ----> Number of characters in the file
+kk.txt ----> File Name
+
+To see the number of lines available in a file
+$ :set number
+
+How to go a specific line?
+$ :<LineNumber>
+
+To copy a specific line
+$ yy
+
+To paste the copied line
+$ p
+
+How to delete a line?
+$ dd
+
+How to undo?
+$ u
+
+How to redo?
+$ control + r
+
+How to delete a specific number of lines at time?
+$ <NumberOfLinesYouWantToDelete>dd
+
+How to copy and paste a specific number of lines?
+$ <NumberOfLinesYouWantToCopy>pp
+
+To delete everything available inside a file?
+$ :%d
+
+=> GREP command
+GREP - Global Regular Expression Print
+GREP command is used to search for a word
+GREP will process the text line by line and prints the lines which contains the word
+
+Syntax: grep '<WordName>' <FileName>
+
+the above command is case sensitive
+
+1. How to ignore the case sensitiveness while using grep command
+grep -i '<WordName>' <FileName>
+
+2. How to search for a word in all the files at a time?
+grep -i 'WordName>' *
+
+	 # print lines which contains java keyword
+	 grep '<WordName>' <FileName>
+
+	 # ignore case-sensitive
+	 grep -i '<WordName>' <FileName>
+
+	 # print along with line numbers 
+	 grep -n '<WordName>' <FileName>
+
+	 # print lines which doesn't contains 'java' keyword (invert match)
+	 grep -v '<WordName>' <FileName>
+
+
+-------------------------------------------------------------------------
+WinSCP Setup - Transferring Files From Windows to Linux
+-------------------------------------------------------------------------
+Here we will use .ppk file. Launch an instance with .ppk file
+
+WinSCP is a tool that is used to transfer files from Windows to Linux
+
+Download WinSCP to laptop: https://winscp.net/eng/download.php#google_vignette
+Install WinSCP
+
+In VM make sure you are in /home/ec2-user ---> create one empty file in this path
+
+Open WinSCP in laptop ----> In the login window, File Protocol: SFTP ----> Click on 'Close' ----> You will see 2 windows. In both windows you will see the downloads folder (by default)
+
+In the top bar (right side) ----> NewTab ----> File Protocol: SFTP ----> Host Name: Public IP of VM, Port No. 22, Username: ec2-user ----> Click on 'Advanced' ----> SSH (leftpane) ----> Authentication (leftpane) ----> Under the 'Private key file' click on ... (3 dots) and select the ppk file ----> OK ----> Login ----> Accept
+On the left side you will see windows and on the right side you will see VM connected tab with path as /home/ec2-user.
+In the left side pane, select any path (Ex: Downloads folder) and select a file and drag and drop that file to the right side window i.e your VM tab.
+
+Goto Moba and execute ls ----> Whatever file you have dragged and dropped the same file you will see here. This is the easiest way to copy the files from Windows to Linux
+
+
