@@ -1,0 +1,547 @@
+														Day 03
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+https://github.com/KastroVKiran/StarAgile-Batch5.git
+
+-------------------------------------------------------------------------
+WinSCP Setup - Transferring Files From Windows to Linux
+-------------------------------------------------------------------------
+Here we will use .ppk file. Launch an instance with .ppk file
+
+WinSCP is a tool that is used to transfer files from Windows to Linux
+
+Download WinSCP to laptop: https://winscp.net/eng/download.php#google_vignette
+Install WinSCP
+
+In VM make sure you are in /home/ec2-user ---> create one empty file in this path
+
+Open WinSCP in laptop ----> In the login window, File Protocol: SFTP ----> Click on 'Close' ----> You will see 2 windows. In both windows you will see the "downloads" folder (by default)
+
+In the top bar (left side) ----> NewTab ----> File Protocol: SFTP ----> Host Name: Public IP of VM, Port No. 22, Username: ec2-user ----> Click on 'Advanced' ----> SSH (leftpane) ----> Authentication (leftpane) ----> Under the 'Private key file' click on ... (3 dots) and select the ppk file ----> OK ----> Login ----> Accept
+On the left side you will see windows and on the right side you will see VM connected tab with path as /home/ec2-user.
+In the left side pane, select any path (Ex: Downloads folder) and select a file and drag and drop that file to the right side window i.e your VM tab.
+
+Goto Moba and execute ls ----> Whatever file you have dragged and dropped the same file you will see here. This is the easiest way to copy the files from Windows to Linux
+
+--------------------------------------------------------------------------------------
+SCP command - Transfer Files From Linux VM to Another Linux VM 
+--------------------------------------------------------------------------------------
+SCP - Secure Copy Protocol, is a command line tool used for securely transferring files between local and a remote host or between 2 remote hosts using SSH for Encryption and authentication
+
+Launch 2 VMs of Amazon Linux 2 AMI, t2.micro. Use same keypair for both VMs
+Connect to both VMs
+
+VM1 Tab of Moba ----> Create 5 files ----> To copy the files we will use SCP, for that first we need to create .pem file in VM1 ----> vi <PEMFileNameUsedToLaunchVM1>.pem ----> Paste the content from pem file which was used to launch VM1 ----> esc ----> :wq ----> sudo chmod 400 <PEMFileNameUsedToLaunchVM1>.pem ----> Lets establish a connection ----> scp -i <PEMFileName>.pem <FileNameYouWantToCopy>  ec2-user@<PrivateIPofVM2>:/home/ec2-user/ ----> [Here ec2-user is the username of VM2] ----> yes
+
+To verify, connect to VM2 and do 'ls' ----> You will see the file
+
+Note: Instead of file, you can give directory name also (Ex: Kastro/). Command to copy directory is as below;
+scp -r -i <PEMFileName>.pem <DirectoryNameYouWantToCopy>/*  ec2-user@<PrivateIPofVM2>:/home/ec2-user/
+
+----------------------------------------------------------
+Setup Nginx WebServer on Linux
+----------------------------------------------------------
+Launch Amazon Linux 2, t2.micro, EC2 instance
+Connect to the VM and execute below commands;
+
+sudo amazon-linux-extras install nginx1
+cd /usr/share/nginx/html/
+ls ----> You will see default 'index.html' file
+
+Nginx configurations will be available in ---> cat /etc/nginx/nginx.conf
+
+sudo systemctl start nginx
+Open Port 80 and access the app
+
+Note: You can keep custom content inside the index.html file
+
+To remove nginx: yum remove nginx -y
+
+----------------------------------------------------------
+Setup Apache WebServer on Linux
+----------------------------------------------------------
+Launch Amazon Linux 2, t2.micro, EC2 instance
+Connect to the VM and execute below commands;
+sudo yum install httpd -y
+cat /etc/httpd/conf/httpd.conf  # all apache configurations will be here (changing port, listen 80 or 8080). Scroll down to "Listen 80". If you want you can change the port so that httpd will work on custom port as well. But dont do that
+cd /var/www/html/
+vi index.html
+<Write Some Content>
+
+sudo systemctl status httpd
+sudo systemctl start httpd
+
+Open Port 80 and access the app
+
+
+=> To compress a specific file
+gzip <FileName> ----> ls ----> You will see the zip file, but original file is lost. Observe the size of zip file and original file. Zip file size will show less size than the original file
+
+If you dont want to lose the original file while compressing;
+gzip -c <FileName> > <FileName>.gz
+
+Zip Multiple Files
+zip archive_name.zip file1 file2 file3
+Replace archive_name.zip with the desired name for your zip file.
+
+Zip an Entire Directory (including subdirectories)
+zip -r archive_name.zip directory_name/
+
+Unzip a Zipped File
+unzip archive_name.zip
+
+Unzip to a Specific Directory
+unzip archive_name.zip -d /path/to/destination/
+
+
+=> tac : To print file data from bottom to top
+		tac f1.txt
+
+=> head : print first 10 lines of the file
+		head <FileName>
+
+		# print first 5 lines only
+		head -n 5 <FileName>
+
+		# print first 15 lines only
+		head -n 15 <FileName>
+
+To see the content from the specific number of line from the top
+$ head -n <LineNumber> <FileName>
+
+To see the content from the specific number of line from the bottom
+$ tail -n <LineNumber> <FileName>
+
+To see the content available in a specific line from top
+$ head +3 <FileName>
+
+=> tail : print last 10 lines of the file
+		tail <FileName>
+
+		# print last 25 lines of data
+		tail -n 25 <FileName>
+
+=============
+SED Command
+=============
+=> SED stands for stream editor
+=> SED is used to process the data (substitute, delete, print, insert)
+=> Using SED command we can perform operations on the file without opening the file.
+=> We will use below options with SED command
+		s - substitute
+		d - delete
+		p - print
+		i - insert
+
+# replace linux keyword with unix
+sed 's/linux/unix/g' <FileName>
+
+# substitute linux with unix and save changes in the file
+sed -i 's/linux/unix/g' <FileName>
+
+# delete first line of the file
+sed -i '1d' <FileName>
+
+# delete 4th line of the file 
+sed -i '4d' <FileName>t
+
+# delete last line of the file
+sed -i '$d' <FileName>
+
+# delete from 3rd line to last line
+sed -i '3, $d' <FileName>
+
+# delete from 10th line to 15th line
+sed -i '10, 15d' <FileName>
+
+# Add line at end of file
+sed -i '$a\My Name is Kastro' <FileName>
+
+# Add line at end of file
+sed -i '2i\I'm a DevOps Trainer' <FileName>
+
+# print 10th line only
+sed -n '10p' <FileName>
+
+# print data from 2nd line to 5th line
+sed -n '2,5p' <FileName>
+
+
+=====================
+File Permissions in Linux
+=====================
+For any file/directory in Linux OS, we have 3 permissions;
+r	- read
+w	- write
+x	- execute
+
+Every file in its permissions will have 9 characters.
+These 9 characters are equally divided into 3 categories.
+The three categories are;
+	1. users (u)
+	2. groups (g)
+	3. others (o)
+
+rw- rw- r--	----> Kastro.txt
+For users ----> read write 
+For groups ----> read write
+For others ---> only read
+
+How to add execute permission for a file? (User)
+chmod u+x Kastro.txt
+
+How to add execute permission for a file? (Group)
+chmod g+x Kastro.txt
+
+How to add write execute permissions for a file? (Others)
+chmod o+wx kastro.txt
+
+----------------------------------------
+File permissions using numbers
+----------------------------------------
+0 - No permissions
+1 - Execute
+2 - Write
+3 - 2 + 1 => Write + Execute
+4 - Read
+5 - 4+ 1 => Read + Execute
+6 - 4 + 2 => Read + Write
+7 - 6 + 1 => Read + Write + Execute
+
+Execute - Users, Group, Others
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Whenever we execute ls -l or ll command we will see the meta data of a file or a directory. As a part of metadata, we will see something like below;
+rw-r--r--
+In general, a file permission in Linux is divided into 3 categories;
+1. User permissions (u)
+2. Group permissions (g)
+3. Others permissions (o)
+
+File ----> Decide the permissions
+In Linux, we have 3 types of permissions;
+1. read permission (r)
+2. write permission (w)
+3. execute permission (x)
+
+Ex: -rw-r--r--. 1 ec2-user ec2-user  66 Dec 26 15:05 dipesh.java
+
+dipesh.java ----> rw-r--r--
+
+First 3 characters represent the "User permissions"
+Second 3 characters represent the "Group permissions"
+Third 3 characters represent the "Others permissions"
+
+dipesh.java ----> Users (r w -)
+dipesh.java ----> Group (r - -)
+dipesh.java ----> Others (r - -)
+
+=> Customizing the file permissions
+chmod
+
+=> How to add a read permission for user
+kastro.txt ----> rw-r--r--
+chmod u+r <FileName>
+
+=> How to add write permission for user
+chmod u+w <FileName>
+
+=> How to add execute permission for user
+chmod u+x <FileName>
+
+=> How to add a read permission for group
+kastro.txt ----> rw-r--r--
+chmod g+r <FileName>
+
+=> How to add write permission for group
+chmod g+w <FileName>
+
+=> How to add execute permission for 
+chmod g+x <FileName>
+
+<OTHERS PERMISSIONS IS A TASK>
+
+=> To remove the file permissions use - symbol
+Ex: chmod g-r <FileName>  ----> In this command for the file, for group category read permission will be removed
+
+==========================
+File Permissions in Numbers
+==========================
+0 => No Permission
+1 => Execute
+2 => Write
+3 => ( 2 + 1) => Write + Execute
+4 => Read
+5 => (4 + 1) => Read + Execute
+6 => (4 + 2) => Read + Write
+7 => (6 + 1) => Read + Write + Execute
+
+# ugo + x
+chmod 111 <FileName>
+
+# ugo + w
+chmod 222 <FileName>
+
+# u+r  g+rx  o+rw
+chmod 456 <FileName>
+
+# u+rwx g+rw o+rx
+chmod 765 <FileName>
+
+# u-rwx g-rwx o+rwx
+chmod 7 <FileName>
+
+Note: When you give 1 or 2 numbers, the permissions will be changed from RIGHT side to LEFT side
+Note: When you give 3 numbers, the permissions will be changed from LEFT side to RIGHT side
+
+===================
+Users in Linux
+===================
+Default users in Linux;
+1. ec2-user
+2. root
+
+76. How to create the custom users?
+Note: You must be a root user to create the users ----> sudo su (or) sudo -i
+Note: Without switching to the root user, we can sudo at the beginning of command to become a root user temporarily
+
+sudo useradd <UserName>
+
+=> To verify the user creation
+id <UserName>
+
+Ex: uid=1001(kastro) gid=1001(kastro) groups=1001(kastro)
+
+=> Switching to the custom user
+sudo su <UserName>
+
+=> To remove a custom user (It will not delete permanently)
+sudo userdel <UserName>
+
+When you want to delete the user permanantly, directly execute the below command in the /home/ec2-user path
+$ sudo userdel -r <UserName>
+
+=> To see the list of users created
+First go inside /home path and then execute the ls -l or ll command
+
+How to create a group?
+$ sudo groupadd <GroupName>
+Every group will have a unique id
+
+89. How to see the id of a group? (or) How to verify the groups available?
+$ cat /etc/group
+
+Note: 
+Whenever we create an user, automatically a group will also get created with the same name.
+Whenever we create a group, an user will not get created.
+
+How to add users to a specific group?
+$ sudo usermod -aG <GroupName> <UserName>
+
+How to see an user belongs to which group?
+$ id <UserName>
+
+How to remove an user from a group?
+$ sudo gpasswd -d <UserName> <GroupName>
+
+How to delete a group?
+$ sudo groupdel <GroupName>
+
+How to see the list of users available?
+$ cat /etc/passwd
+
+How to see the list of users available in a group?
+$ sudo lid -g <GroupName>
+
+How to set a password for an user?
+$ sudo passwd <UserName>
+
+===============
+chown command
+===============
+=> chown ---> Change ownership
+=> It is used to change file/directory ownership
+
+When we create a file or directory and execute ll or ls -l command we will see ec2-user ec2-user
+The first ec2-user represent the owner of a file
+The second ec2-user represent the file belongs to which group
+
+How to change the ownership of file
+sudo chown <UserName> <FileName>
+
+How to change the group permission of a file which is for a specific user
+sudo chown <UserName>:<GroupName> <FileName>
+
+# change owner
+sudo chown new-owner <file/dir>
+
+# change owner & group of file/directory
+sudo chown new-owner:new-group <file/directory>
+
+----------------------------
+SHELL SCRIPTING
+----------------------------
+pwd whoami date cal ....
+
+Shell file is created to automate the task execution
+We will create shell file to automate the task
+Shell files will have .sh as extension
+
+Kastro.sh -----> pwd whoami date cal ----> execute the shell file (sh <FileName>) ----> All the commands inside the shell file will get executed
+
+Repo URL: https://github.com/KastroVKiran/ShellScriptingforDevOpsEngineering.git
+
+Deadline: 17-03-2025
+Assignment Submission Deadline: 18-03-2025
+
+How to submit the assignments?
+--------------------------------------
+1. Create a word file
+Name: 
+2. heading - Day 01
+	Task 1: Write the script, Execute it, Take the screenshot of that output and paste in word file
+	ask 1: Write the script, Execute it, Take the screenshot of that output and paste in word file
+3. Convert the word file to pdf file
+4. Upload that file (Link)
+======================
+Networking commands
+======================
+ping : To check connectivity
+	ping www.google.com
+	ping 192.168.1.34
+
+wget : It is used to download files from internet
+	wget <url>
+
+curl : It is used to send http request to the url
+	curl <url>
+	curl https://jsonplaceholder.typicode.com/posts
+
+ifconfig : To get IP address of our machine
+
+==========================
+Package Managers in Linux
+==========================
+=> Package means a software
+	Ex: git, maven, java, etc.....
+=> package managers are used to manage software packages (softwares) in linux machine.
+=> package managers are specific to linux distribution
+	Amazon Linux  ===> yum
+	Ubuntu Linux  ===> apt
+
+yum - Yellowdog Updater, Modifier - Linux OS
+apt - Advanced Packaging Tool - Ubuntu OS
+dnf - Dandified yum
+dpkg - Debian Package Management System
+rpm - Redhad Package Manager - RedHat
+
+# check git client installed or not
+git --version	
+
+# install git client s/w
+sudo yum install git -y
+
+# check git installation path
+whereis git
+
+# check maven installed or not
+mvn --version
+
+# install maven s/w
+sudo yum install maven -y
+
+# check maven installation path
+whereis maven
+
+================================
+What is systemctl in linux ?
+================================
+=> systemctl is used to manage services in linux machines.
+=> using systemctl we can perform below operations
+		a) start a service
+		b) stop service
+		c) re-start service
+
+# stop httpd server
+sudo systemctl stop httpd		
+
+# start httpd server
+sudo systemctl start httpd
+
+# reload service
+sudo systemctl reload httpd
+
+=============================================
+How to change hostname in vm?
+=============================================
+# set hostname
+$ sudo hostname <new-name>
+
+# re-start session 
+$ exit 
+Note: connect back to vm then we can see configured hostname
+
+
+
+
+To see the list of all services installed
+systemctl list-units --type=service --all 
+
+To see about a particular service (ex: nginx)
+systemctl list-units --type=service --all | grep nginx
+
+To see the disc file system
+df -h [-h represents human readable]
+
+To see the size of a directory
+ls -ltr
+
+To see memory details
+free -h
+df -h
+
+To see for how long the VM is running
+uptime
+
+To see whether a software is installed or not
+rpm -qa | grep <SoftwareName>
+yum list available | grep <SoftwareName>
+Ex: rpm -qa | grep java
+Ex: yum list available | grep java
+
+To see the list of packages/softwares installed
+dnf list installed
+yum list available
+
+=> How to find the number of .txt files available?
+$ locate -c *.txt
+$ locate -c *.py
+$ locate -c *.java
+
