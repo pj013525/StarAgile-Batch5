@@ -1,0 +1,211 @@
+														Day 04
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+https://github.com/KastroVKiran/StarAgile-Batch5.git
+
+----------------------------------------------------------
+Setup Apache WebServer on Linux
+----------------------------------------------------------
+Launch Amazon Linux 2, t2.micro, EC2 instance
+
+#!/bin/bash
+sudo yum update -y
+sudo yum install -y httpd
+sudo systemctl start httpd
+sudo systemctl enable httpd
+echo "Welcome to Day 04 of DevOps Classes by KASTRO" | sudo tee /var/www/html/index.html > /dev/null
+
+
+=============
+SED Command
+=============
+=> SED stands for stream editor
+=> SED is used to process the data (substitute, delete, print, insert)
+=> Using SED command we can perform operations on the file without opening the file.
+=> We will use below options with SED command
+		s - substitute
+		d - delete
+		p - print
+		i - insert
+
+# replace linux keyword with unix
+sed 's/linux/unix/g' <FileName>
+
+# substitute linux with unix and save changes in the file
+sed -i 's/linux/unix/g' <FileName>
+
+# delete first line of the file
+sed -i '1d' <FileName>
+
+# delete 4th line of the file 
+sed -i '4d' <FileName>t
+
+# delete last line of the file
+sed -i '$d' <FileName>
+
+# delete from 3rd line to last line
+sed -i '3, $d' <FileName>
+
+# delete from 10th line to 15th line
+sed -i '10, 15d' <FileName>
+
+# Add line at end of file
+sed -i '$a\My Name is Kastro' <FileName>
+
+# Add line at end of file
+sed -i '2i\I'm a DevOps Trainer' <FileName>
+
+# print 10th line only
+sed -n '10p' <FileName>
+
+# print data from 2nd line to 5th line
+sed -n '2,5p' <FileName>
+
+Add line at beginning of file
+sed -i '1s/^/This is Kiran\n/' filename
+
+======================
+Networking commands
+======================
+ping : To check connectivity
+	ping www.google.com
+	ping 192.168.1.34
+
+wget : It is used to download files from internet
+	wget <url>
+
+curl : It is used to send http request to the url
+	curl <url>
+	curl https://jsonplaceholder.typicode.com/posts
+
+ifconfig : To get IP address of our machine
+
+==========================
+Package Managers in Linux
+==========================
+=> Package means a software
+	Ex: git, maven, java, etc.....
+=> package managers are used to manage software packages (softwares) in linux machine.
+=> package managers are specific to linux distribution
+	Amazon Linux  ===> yum
+	Ubuntu Linux  ===> apt
+
+yum - Yellowdog Updater, Modifier - Linux OS
+apt - Advanced Packaging Tool - Ubuntu OS
+dnf - Dandified yum
+dpkg - Debian Package Management System
+rpm - Redhat Package Manager - RedHat
+
+# check git client installed or not
+git --version	
+
+# install git client s/w
+sudo yum install git -y
+
+# check git installation path
+whereis git
+
+# check maven installed or not
+mvn --version
+
+# install maven s/w
+sudo yum install maven -y
+
+# check maven installation path
+whereis maven
+
+================================
+What is systemctl in linux ?
+================================
+=> systemctl is used to manage services in linux machines.
+=> using systemctl we can perform below operations
+		a) start a service
+		b) stop service
+		c) re-start service
+
+# stop httpd server
+sudo systemctl stop httpd		
+
+# start httpd server
+sudo systemctl start httpd
+
+# reload service
+sudo systemctl reload httpd
+
+=============================================
+How to change hostname in vm?
+=============================================
+# set hostname
+$ sudo hostname <new-name>
+
+# re-start session 
+$ exit 
+Note: connect back to vm then we can see configured hostname
+
+
+=> To see the list of all services installed
+systemctl list-units --type=service --all 
+
+=> To see about a particular service (ex: nginx)
+systemctl list-units --type=service --all | grep nginx
+
+=> To see the disc file system
+df -h [-h represents human readable]
+
+=> To see the size of a directory
+ls -ltr
+
+=> To see memory details
+free -h
+df -h
+
+=> To see for how long the VM is running
+uptime
+
+=> To see whether a software is installed or not
+rpm -qa | grep <SoftwareName>
+yum list available | grep <SoftwareName>
+Ex: rpm -qa | grep java
+Ex: yum list available | grep java
+
+=> To see the list of packages/softwares installed
+dnf list installed
+yum list available
+
+=> How to find the number of .txt files available?
+$ locate -c *.txt
+$ locate -c *.py
+$ locate -c *.java
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------
+Module 2: Introduction to DevOps
+----------------------------------------------------
+
+S3, EC2, VPC, RDS, IAM, ROUTE 53, ELB, ASG
+
+123.34.45.66 ----> flipkart.com
+
+123.34.45.66, 123.34.45.67, 123.34.45.68 -----> ELB (Lengthy URL) -----> Custom Domain (Route 53)
+
+App	-----> Custom Domain ----> User: Login -----> Username, Password ----> DB
+Admin ----> DB ----> User information
+
+AWS Project -----> S3, EC2, VPC, RDS, IAM, ROUTE 53, ELB, ASG
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
