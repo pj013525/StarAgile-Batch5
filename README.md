@@ -37,6 +37,7 @@ Expand your **DevOps knowledge** with these free resources! 🚀
 
 ### 🖥 **Shell Scripting for DevOps Engineers**  
 [![Watch on YouTube](https://img.shields.io/badge/-Watch%20Now-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/playlist?list=PLs-PsDpuAuTeT2iRQpNs0sl-sXFD10I1C)
+
 Assignment Submission Form: https://docs.google.com/forms/d/e/1FAIpQLSdaejvcr69EgY6ua9UXSS_zJBmfUlqH44_YB_gcHxf6p7qxQQ/viewform?usp=sharing
 
 ### 🐳 **Docker - Basics to Brilliance**  
