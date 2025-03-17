@@ -1,0 +1,43 @@
+										Day 05
+------------------------------------------------------------------------------------------------------------------------------------------------
+AWS 3 Tier Project
+---------------------------------------
+Screenshot 1 After entering the data in the app, that screenshot is also required
+Screenshot 2 Access the database and the data inside it. The screenshot of data is required
+
+Shell Scripting Assignment Duedate: 19-03-2025 before 10.00 AM
+
+AWS Project: 24-03-2025
+
+Introduction to DevOps;
+1. How projects come to IT industry?
+2. Roles of different teams involved in a project
+3. SDLC
+4. SDLC Methodologies
+5. Introduction to DevOps
+6. Activities of DevOps Engineers
+7. Tools used by DevOps Engineers
+8. Client Server Architecture
+9. Types of Client Server Architecture
+10. Environments and roles of environment
+
+
+Shell Scripting Repo: https://github.com/KastroVKiran/ShellScriptingforDevOpsEngineering.git
+Shell Scripting Videos: 
+
+----------------------------
+DevOps on AWS (2 days)
+----------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
