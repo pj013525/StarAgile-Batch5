@@ -1,0 +1,108 @@
+										Day 08
+------------------------------------------------------------------------------------------------------------------------------------------------
+GIT & GITHUB 
+-------------------------------------
+To add all the files to the staging area
+git add . 
+
+To add specific files to the staging area
+git add <FileNames>
+
+To commit a specific file
+git commit -m "<CommitMessage>" <FileNames>
+
+To see the commit history
+git log
+
+To see the latest 2 commits
+git log -2
+git log --oneline -2
+
+To see the commit history from oldest to latest
+git log --reverse
+git log --reverse --oneline
+
+To see the commit history of a specific file
+git log <FileName>
+
+To see only the commit messages and to know number of commits made
+git shortlog
+
+To see the statistics of commits
+git log --stat
+git log -p
+git log -p -2
+
+To see only the number of commits made in a specific branch
+git rev-list --count HEAD
+
+To see the number of commits made in all the branches
+git rev-list --count --all
+
+Note: It is not recommended to delete the ".git" folder. If we delete, the configurations available in the .git folder will also be deleted. If the configurations are deleted, we cannot push the files from local repo to remote repo (GitHub)
+
+GIT BLAME
+To know the author name and author email of a line in a file whoever has commited
+
+To display the author names who has changed the lines
+git blame <FileName> 
+
+To display the author email ids who has changed the lines
+git blame -e <FileName>
+
+To unstage a staged file
+git rm --cached <FileName>
+
+How to recover a deleted file?
+	Create a file and add it and commit it
+	Write some content inside the same file and add it and commit it
+	Delete the file
+	Get the logs of a file
+	Recover the file
+		git checkout <NextLatestCommitID> <FileName>
+	Verify for the recovered file and its content
+
+GIT DIFF
+To see the differences b/w any two commits
+It is also used to see the changes b/w working tree and staging area
+
+GIT CHECKOUT
+To switch to the oldest version of the same file from the latest file and vice versa
+Method 1 - Roll Back
+
+Method 2 - Recover a deleted file
+
+GIT RESTORE
+Method 3 - Restoring to the original version of a file
+
+Method 4 - Restore a deleted file
+
+GIT STASH
+10.00 AM ---- Manager gave you a task ---- 10.30 AM started working on the task ---- Workinggggg ----- 01.00 PM ---- Manager gave you another task which is of immediate priority
+
+10.30 AM --- Still going on (70% completed) - Will you add and commit? NOOOOO
+Git offers to store the partially completed work in a temporary location
+And then you can start working on the new task
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
