@@ -1,0 +1,104 @@
+										Day 09
+------------------------------------------------------------------------------------------------------------------------------------------------
+GIT & GITHUB 
+-------------------------------------
+GitHub 
+
+----------------------------------------
+Introduction to GitHub
+----------------------------------------
+GitHub is GUI based
+If you want to keep the code or get the code from the GitHub, internet connection is essential.
+Sign-up to GitHub
+Create one GitHub account
+
+------------------------------------------------
+Creation of GitHub account
+------------------------------------------------
+
+---------------------------------------
+Working with GitHub
+---------------------------------------
+In GitHub we will create repositories.
+two types of repos;
+	1. Public repo		- anyone can access the public repos
+	2. Private repo	- which is only for you or you can give permissions to a specific user
+
+--------------------------
+Creation of repo
+--------------------------
+Whenever we create a repo, repo URL will be available
+
+---------------------------------------------------------------------------
+Pushing the files from local repo to remote repo
+---------------------------------------------------------------------------
+git remote add origin https://github.com/KastroVKiran/staragile-public-repo.git
+git branch -M main
+git push -u origin main
+
+When we are pushing the code for the first time, only then you have to configure the token
+PAT creation is one time activity
+
+-------------------------------------------------------------------
+How to write the content in readme.md file
+-------------------------------------------------------------------
+md - markdown language
+To decorate your GitHub repos or your GitHub account, we will write the readme.md file
+
+----------------------------
+Forking a repo
+----------------------------
+If you want to get others repos into your GitHub account, then fork that repo.
+When we fork a repo, automatically whenever the owner of the original GitHub repo does any changes, all those changes will be replicated into your GitHub account as well
+
+--------------------------------------------------------------------
+How to get a remote repo to the local system
+--------------------------------------------------------------------
+To get the repo from GitHub account to the local system, we will use GIT CLONE
+git clone
+
+-----------------------
+GIT Branches
+-----------------------
+Netflix - 4 teams - dev, test, db, devops - single repo
+	Dev - dev files (5)		- dev branch
+	Test - test files (10)		- test branch
+	DB	- db files (7)		- db branch
+	DevOps - devops (15)	- devops branch
+GitHub branches are used to segregate the work done by different working for the same project
+
+Default branch is MASTER/MAIN
+
+GIT IGNORE
+
+Changing the default branch (in GitHub)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
