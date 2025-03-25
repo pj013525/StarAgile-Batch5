@@ -1,0 +1,77 @@
+										Day 10
+------------------------------------------------------------------------------------------------------------------------------------------------
+GIT & GITHUB 
+-------------------------------------
+Renaming a branch (using git terminal)
+	git branch -m <Current Branch Name> <New Branch Name>
+Renaming a branch (in GitHub)
+	Method1: 
+	Open repo ---> Settings ----> Make the branch you want to rename as a default branch and then 	rename the branch
+	Method 2:
+	Open repo ----> Click on "view all branches" ----> Click on 3 dots (extreme right side) ----> rename 	the branch
+
+Deleting a branch (using git terminal)
+	git branch -D <Branch Name> 
+Deleting a branch (in GitHub)
+	Open repo ----> Click on "view all branches" ----> Click on 3 dots (extreme right side) ----> delete 	the branch
+	Note: You can recover the deleted branch, if you don't reload the page. Once the page is reloaded 	there is no way of getting back the branch
+
+GIT PULL
+--------------------------
+git clone is used to get the complete code into our local repo
+git pull is used to get the changes made in the remote repo
+
+Note: Whenever you want to push the code from local to remote repo, it is recommended to pull the changes
+
+GIT MERGE
+-------------------------
+Merging is the concept of merging one branch files with another branch files
+
+
+GIT REBASE
+-------------------------
+It is also used to add the files from one branch to another branch
+
+Merge Vs Rebase
+--------------------------------
+1. Merge will show files, rebase will not show the files
+2. Merge will show entire history, rebase will not show the history
+3. Merge will not show branches, rebase will show branches
+
+Merging the branches in GitHub console
+-------------------------------------------------------------
+PULL REQUEST
+
+db-branch ---- 5 db files, 1 master.txt 
+dev-branch ---- 5 dev files, 1 master.txt 
+
+MERGE CONFLICTS
+-------------------------------------------
+Developer 1 --- Branch 1 ---- file1.txt --- JAVA, JAVA Version 17
+Developer 2 --- Branch 2 ---- file1.txt --- PYTHON
+
+Cherry Pick
+--------------------------
+Tree --- 5 cherries ----- 3 cherries are good
+
+Branch 1 --- 5 files
+Branch 2 --- 3 specific files
+
+Collaborators in GitHub
+----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
