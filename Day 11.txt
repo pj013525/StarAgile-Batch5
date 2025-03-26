@@ -1,0 +1,289 @@
+										Day 11
+------------------------------------------------------------------------------------------------------------------------------------------------
+GIT & GITHUB 
+-------------------------------------
+GitHub collaborators
+
+Note: For public repos, if its a free GitHub account, a maximum of 100 collaborators can be added.
+
+Basic Git Commands
+--------------------------------
+git init - Initialize a new Git repository.
+git clone <repo-url> - Clone a repository into a new directory.
+git status - Show the working tree status.
+git add <file> - Add file contents to the index (staging area).
+git add . - Stage all changes in the current directory.
+git commit -m "<message>" - Commit changes with a message.
+git commit -a -m "<message>" - Commit all tracked changes.
+git diff - Show changes between commits, commit and working tree, etc.
+git log - Show commit logs.
+git show <commit> - Show the changes made in a specific commit.
+
+Branching and Merging
+-------------------------------------------
+git branch - List branches.
+git branch <branch-name> - Create a new branch.
+git checkout <branch-name> - Switch to a branch.
+git checkout -b <branch-name> - Create and switch to a new branch.
+git merge <branch-name> - Merge a branch into the current branch.
+git rebase <branch-name> - Reapply commits on top of another base tip.
+git branch -d <branch-name> - Delete a branch.
+git cherry-pick <commit> - Apply the changes introduced by some existing commits.
+git merge --no-ff <branch-name> - Merge without fast-forwarding.
+git rebase -i <commit> - Interactively rebase commits.
+
+Remote Repositories
+-------------------------------
+git remote -v - Show remote repositories.
+git remote add <name> <url> - Add a remote repository.
+git fetch <remote> - Fetch changes from a remote repository.
+git pull <remote> <branch> - Fetch and merge changes from a remote branch.
+git push <remote> <branch> - Push changes to a remote branch.
+git push --force <remote> <branch> - Force push to a remote branch.
+git pull --rebase - Fetch and rebase the current branch.
+git remote remove <name> - Remove a remote repository.
+git remote rename <old-name> <new-name> - Rename a remote.
+
+Stashing and Cleaning
+-----------------------------------
+git stash - Stash the changes in a dirty working directory.
+git stash pop - Apply the latest stash and remove it from the stash list.
+git stash list - List all stashed changes.
+git stash apply - Apply the latest stash without removing it.
+git clean -fd - Remove untracked files and directories.
+git clean -fx - Remove untracked files, including ignored files.
+
+Configuration and Help
+--------------------------------
+git config --global user.name "<name>" - Set global username.
+git config --global user.email "<email>" - Set global email.
+git config --list - List all Git configurations.
+git config --global core.editor <editor> - Set the default text editor for Git.
+git config --global alias.<alias-name> <command> - Create an alias for a command.
+git help <command> - Get help for a specific command.
+
+git reset <commit> - Reset the current branch to a specific commit.
+git reset --hard <commit> - Reset and discard all changes.
+git revert <commit> - Create a new commit that undoes a previous commit.
+git blame <file> - Show what revision and author last modified each line of a file.
+git shortlog - Summarize commit history.
+git push origin HEAD - Push the current branch to the remote repository.
+git mv <old> <new> - Move or rename a file.
+git log --oneline - Show a brief log of commits.
+git log --graph - Show a graphical representation of the commit history.
+git blame <file> - View blame information for a file.
+git reset <file> - Unstage a file.
+git commit --amend - Modify the last commit.
+git fetch origin - Fetch changes from the origin.
+
+Developer tools: Maven, Git & GitHub
+
+---------------------------
+Deployment
+---------------------------
+What is deployment?
+	App ---- End users to access the app ---- deployment --- 1. physical servers, 2. Virtual servers
+
+Types of deployments?
+	1. Manual deployment
+	2. Automated deployment
+
+Manual deployment
+	Code (Java) --- build the code (compile & package) - Maven ---- jar/war generation --- deploy into 	the server
+	To deploy the code into the servers, we need webservers. 
+		webservers - apache, nginx, tomcat*, jboss...
+	EC2 instance ---- install the webserver
+
+All the java based applications will be deployed in the tomcat webserver
+
+Java 8 Version ----> JDK (Java Development Kit), JRE (Java Runtime Environment)
+
+Local system -----> MAVEN, JAVA
+------------------------------------------------
+Download & Install Java Software:
+------------------------------------------------
+~ In order to download the Java Software, we need to create an account in Oracle Website.
+~ Weblink: https://www.oracle.com/in/java/technologies/downloads/#jdk21-windows
+
+Configuration of Java Software:
+------------------------------------------------
+~ After installation of Java Software, we have to set JAVA_HOME in environment variables.
+~ The variables which are used by our PC are called environment variables.
+~ Two types of environment variables: 1. User Variables 2. System Variables
+
+~ Once after downloading and installing the java s/w, follow the below steps;
+
+Setting up the JAVA_HOME page for system variables:
+------------------------------------------------------------------------------
+~ C Drive - Program Files - Java - jdk - Copy the jdk folder path - In the search box of PC, type "Environment" and select 'Edit System Environment Varibles' - A dialogue box will open - Advanced - Environment Variables - A dialogue box will open - System Variables - New - A dialogue box will open - Variable Name: JAVA_HOME, Variable Value: <Paste the path of jdk folder> - OK - OK - OK.
+
+Setting up the path for Java:
+------------------------------------------
+~ C Drive - Program Files - Java - jdk - bin - Copy the bin folder path - In the search box of PC, type Environment and select 'Edit System Environment Varibles' - A dialogue box will open - Advanced - Environment Variables - A dialogue box will open - System Variables - Select the "path" - Edit - New - Paste the path - OK - OK - OK.
+
+How to check whether java is working or not:
+----------------------------------------------------------------
+~ Open Command Prompt ----> java -version ----> You should see the Java Version Number/Id
+
+How to download Maven from Apache Website:
+--------------------------------------------------------------------
+~ Google ----> Download apache maven (https://maven.apache.org/download.cgi) ----> "Binary Zip Archive" and click on the link next to it ----> The file gets downloaded in the Zip format ----> Extract the zip file ----> Copy the folder ----> Paste the folder in the C Drive
+
+------------------------------------------------
+Configuration of Maven Software:
+------------------------------------------------
+Setting up the MAVEN_HOME in system environment variables:
+---------------------------------------------------------------------------------------------
+~ C Drive - Paste the extracted zip folder in C Drive - Apache Maven folder - Copy the folder path - In the search box of PC, type Environment and select 'Edit System Environment Variables - A dialogue box will open - Advanced - Environment Variables - A dialogue box will open - System Variables - New - Variable Name: MAVEN_HOME, Variable Value: <Paste the path of maven folder> - OK - OK - OK.
+
+Setting up the path for Maven:
+------------------------------------------
+~ C Drive - Apache folder - Bin Folder - Copy the bin folder path - In the search box of PC, type Environment and select 'Edit System Environment Varibles' - A dialogue box will open - Advanced- Environment Variables - A dialogue box will open - System Variables - Select the "path" - Edit - New - Paste the path - OK - OK - OK.
+
+How to check whether Maven is working or not:
+----------------------------------------------------------------
+~ Open Command Prompt ----> mvn --version ----> You should see the Maven Version Number/Id
+
+Deployment -----> EC2 Instance ----> Install Tomcat ----> Setup the Tomcat ----> Tomcat Dashboard ----> Deploy the war file
+=============================================================================
+How to download the tomcat server into the local system
+----------------------------------------------------------------------
+https://tomcat.apache.org/download-90.cgi
+Click on Tomcat 9 in the downloads section
+
+Folder structure of tomcat server
+-----------------------------------------
+=> BIN (Binaries) - It contains the files to start and stop the tomcat server.
+		(.sh files - are used for linux OS) ----> startup.sh (This is used to start the server), shutdown.sh (This is used to stop the server)
+		(.bat files - are used for window OS) ----> startup.bat (This is used to start the server), shutdown.bat (This is used to stop the server)
+
+=> CONF (Configuration) - It contains configuration files
+			(server.xml ----> To configure the tomcat port number)
+			(tomcat-users.xml ---->  To configure the user details)
+
+=> LIB (Library) - Library folder contains librariers i.e jar files
+
+=> LOGS - It contains the server logs i.e execution details
+
+=> TEMP (Temporary) - It contains the temporary data
+
+=> WEBAPPS - In this folder we will keep the application war files. It is also called as "Deployment" folder.
+
+Process
+--------------
+Developers (Write the code) ----> Push the code repo. ----> Clone the repo. ----> Package the file ----> war file ----> Keep the war file in the webapps folder.
+
+=> We can keep multiple war files in the webapps folder. But it is not suggested.
+
+Working with Tomcat in the Linux ec2 instance
+-----------------------------------------------------------
+~ Launch the Linux based VM
+~ Connect to the Instance
+~ Install Java Software:
+	To install Java 17 on Amazon Linux:
+		sudo yum update -y
+		sudo yum install java-17-amazon-corretto -y
+		java -version
+
+~ Check the Java Version:
+	java -version
+
+Installation of Tomcat Web Server in Linux based VM
+----------------------------------------------------------------------------
+~ Since the VM is Linux based OS, we will install the "tar" file of Apache Tomcat Web Server
+		https://tomcat.apache.org/download-90.cgi
+~ Keep the cursor on tar.gz file and right click and select 'Copy link address'
+~ To install the Webserver: wget <Paste the tar.gz link> (Tar file of Apache Tomcat will get installed)
+~ Extract the tar file
+	tar -xvf <Name visibile in the red colour in the above link>
+	ls -l (You can see the extracted file in blue clolor)
+~ cd <Enter the name visibile in blue colour in above line>
+	ls -l (To see the folder structure)
+
+Starting the Tomcat Sever
+------------------------------------------
+~ To start the server, we need to access the startup.sh file. This file is available in BIN Folder
+~ cd bin/
+~ To start the sever, 
+	./startup.sh (You can see "Tomcat Started")
+
+Accessing Tomcat Server
+--------------------------------------
+~ Copy the Public IP of EC2 Instance and paste in new tab ---- You will see the error page. This is because, the port no. 8080 is not enabled.
+
+~ Enable Port No. 8080 in SGs of EC2 Instance.
+	Type: Custom TCP, Port: 8080, Source: Anywhere
+
+~ After enabling the port no 8080, go to new tab,
+		<Paste the public IP of instance>:8080/ -----------You can see tomcat server page
+
+Deploy the Web Application in Tomcat Server
+---------------------------------------------------------------
+The war file has to be deployed in the WEBAPPS Folder
+
+Goto 02-Maven-WebApp-CivilEdu -----> Open Command Prompt in that path ----> Lets package the project -----> mvn clean package -----> You can see Build Success ----> You can see the war file in target folder
+
+Since we are accessing the Tomcat in our PC, we can only access the HOME PAGE of TOMCAT. We cannot perform the Admin activities from our PC.
+To perform the admin activities from our PC, we need to edit the "context.xml" and configure "tomcat-user.xml" files.
+
+Editing the context.xml to give the Admin permissions
+------------------------------------------------------------------------------
+File path of context.xml:
+	cd tomcat/webapss/manager/META-INF/context.xml
+
+vi context.xml ----> Edit the allow tag -----> ".*" />
+
+Configuring the Users in Tomcat
+---------------------------------------------
+we need to edit the tomcat-users.xml to configure the users. 
+The "tomcat-users.xml" file is available in "conf" folder
+
+<role rolename="manager-gui" />
+<user username="tomcat" password="tomcat" roles="manager-gui" />
+<role rolename="admin-gui" />  
+<user username="admin" password="admin" roles="manager-gui,admin-gui"/>
+
+Click on 'Server Status' in the Tomcat Browser ----> Enter the username (admin) and password (admin)
+
+Deploying the "war" file of our application
+------------------------------------------------------------
+Scroll down to see "War file to deploy" -----> Click on Choose File ----> Select the war file from our PC ----> Click on "Deploy" 
+You can see our application under "List Applications"
+
+Click on the Application Name (02-Maven-WebApp) -----> You will be able to see the HELLO WORLD!
+
+Note: HELLO WORLD! is seen because it is available in index.jsp file which is there in "target folder"
+
+This is all about the Manual Deployment.
+-----------------------------------------------------
+Problem with Manual Deployment
+-----------------------------------------------------
+If developer makes any changes to the code, as a DevOps Engineer we have to;
+	- pull/clone
+	- Build the code (generate war file)
+	- Manually deploy the war file
+
+Automated Deployment - JENKINS
+By using Jenkins, we can automate the build and deployment process
+Jenkins is called as CI & CD tool
+CI - Continuous Integration
+CD - Continuous Delivery
+
+Jenkins + GitHub + Tomcat + Maven + SonarQube + Nexus + S3 Bucket + Docker + Ansible + Terraform + Kubernetes 
+
+5 days - Jenkins (2 Projects) - 3 Projects Assignment 
+Jenkins 
+SonarQube
+Nexus
+S3 Bucket
+
+
+
+
+
+
+
+
+
+
+
