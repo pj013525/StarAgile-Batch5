@@ -69,22 +69,6 @@ Job1 ---- 5 builds --- 500 MB
 Jenkins Admin ---- Deployment is ready to happen (job is ready to be built) ---- Vacation ---- No laptop ---- Trigger the job ---- Configure "Trigger Builds Remotely" ---- URL ---- Email/WhatsApp
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 JOB 1 - Freestyle (Jenkins Parameters)
 "This project is parameterized"
 Parameters are used to pass variables in key-value pairs during the build
