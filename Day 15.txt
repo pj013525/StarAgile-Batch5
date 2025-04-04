@@ -1,0 +1,255 @@
+										Day 15
+------------------------------------------------------------------------------------------------------------------------------------------------
+									     JENKINS
+------------------------------------------------------------------------------------------------------------------------------------------------
+=> Master & Slave
+EC2 Instance (Kastro) --- Jenkins --- Job1 --- Build the job1 --- All the job details will be stored in the same EC2 instance where Jenkins is running
+Job 10 --- All the 10 job details will be stored in the same EC2 instance where Jenkins is running
+
+When the real-time projects are being built, they occupy too much of space in the EC2 instance
+Ec2 Instance (t2.micro, 30 GB) - Jenkins, Git, Maven, Java, Tomcat... (10 GB)
+20 GB --- 1 time build will take 500 MB of storage
+40 builds --- all the storage will get consumed (30 GB is utilized)
+41st build --- Pipeline (10 stages)
+
+Creating the job, Building the job, Installing the tools in the VM is not recommended to do in a single instance
+
+VM 1 (Master Node) --- Jenkins, Maven, Java, Tomcat --- Create and Build the job
+VM 2 (Slave Node) --- All the job details will be stored in VM 2 (/var/lib/Jenkins/workspace/)
+
+Can we have multiple Master Nodes?
+	NO
+Can we have multiple Slave Nodes?
+	YES
+
+Master Node - Jenkins, Java, Maven, Tomcat, Create the job, Trigger job
+	Option 1: t2.micro, 30 GB
+	Option 2: t2.large, 30 GB - Preferred
+Slave Node - Java, Maven, Git, Store the job details
+	Option 1: t2.micro, 35 GB - Preferred
+	Option 2: t2.large, 30 GB
+
+How Master Node and Slave Nodes will connect with each other?
+	SSH Connection
+	In Jenkins dashboard, we will configure Slave Nodes available
+
+Pipeline Project - Hotstar
+
+P - Pipeline
+A - Agent (slave1)
+S
+S
+
+Master Node
+Slave Node 1
+Slave Node 2
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+MASTER & SLAVE CONCEPT - Jenkins + Tomcat - Hotstar App
+So far in the pipeline scripts, we have kept "agent any" now we will change that a little bit. To do this, we need to configure the slave 1 and slave 2 VM names in the Jenkins dashboard
+
+*********
+Step 1
+*********
+Launch Amazon Linux 2 AMI, t2.micro - Launch 3 VMs
+VM1 Name: Master, VM2 Name: Slave 1, VM3 Name: Slave 2
+
+As all these are Linux VMs, they will be communicated with each other using SSH protocol
+*********
+Step 2
+*********
+Connect to the VM1 i.e Master VM and execute the below commands;
+sudo -s   
+sudo yum update
+
+hostnamectl set-hostname MASTER
+sudo -i
+You will see root@MASTER in the beginning 
+
+To install jenkins using shell file;
+vi jenkins.sh ----> Paste the below commands in the file ---->
+#STEP-1: Installing Git and Maven
+yum install git maven -y
+
+#STEP-2: Repo Information (jenkins.io --> download -- > redhat)
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+
+#STEP-3: Download Java 17 and Jenkins
+sudo yum install java-17-amazon-corretto -y
+yum install jenkins -y
+
+#STEP-4: Start and check the JENKINS Status
+systemctl start jenkins.service
+systemctl status jenkins.service
+
+#STEP-5: Auto-Start Jenkins
+chkconfig jenkins on
+
+----> esc ----> :wq ----> sh jenkins.sh ----> You will see jenkins is running ----> Access jenkins and setup jenkins
+
+*********
+Step 3
+*********
+Note: No need to install Jenkins on slave nodes
+Note: In the pipeline, we usually have git, java, maven, so we need to install these 3 s/w on slave nodes
+
+Connect to Slave 1 and Slave 2 VMs also
+
+Goto Slave 1 connected tab in Moba and set the hostname;
+sudo -s
+sudo yum update
+hostnamectl set-hostname SLAVE-1
+sudo -i
+You will see root@SLAVE-1 in the beginning 
+
+Goto Slave 2 connected tab in Moba and set the hostname;
+sudo -s
+sudo yum update
+hostnamectl set-hostname SLAVE-2
+sudo -i
+You will see root@SLAVE-2 in the beginning 
+
+Goto Slave 1 & Slave 2 connected tabs in Moba ----> We shall setup Slave 1 and Slave 2 now.
+Execute below command in both Slave Nodes
+
+amazon-linux-extras install java-openjdk11 -y
+OR
+sudo yum install java-17-amazon-corretto-devel maven git -y [USE THIS COMMAND IN CLASS]
+
+*********
+Step 4
+*********
+Lets configure the Slave Nodes in Jenkins dashboard
+Adding Slave 1 in Jenkins dashboard
+Jenkins dashboard ----> Build executor status (left pane bottom) ----> Currently you will "Built-in node" which means it is a MASTER node ----> Click on "New Node" ----> Node name: slave1, Type: Permanent Agent ----> Create ----> Name: slave1 ----> Description: This is Slave 1 ----> No. of executors: 3 (this is to run number of builds parallelly) ----> Remote root directory: /tmp (In this path of slave nodes, the builds will be stored) ----> Labels: slave1 (This label name is very important because this label name is the same name we should configure in the pipeline script. Based on this only, the job will get executed on whichever worker node we want) ----> Usage: Only build jobs with label expressions matching this node ----> Launch method: Launch agents via SSH ----> Host: <PrivateIPofSlave1> ----> Credentials: Add: Jenkins ----> Scope: Global, Kind: SSH username with private key, Scope: Global, ID: <Leave Blank> ,Description: <Leave Blank>, Username: ec2-user, Private key: Enter directly: Paste the entire content from pem file which is used to launch worker node 1 ----> Save ----> From the dropdown, select "ec2-user" ----> Host key verification strategy: Non verifying verification strategy ----> Availability: Keep this agent online as much as possible ----> Save ----> You can see Slave1 got added. Just refresh, you will see the values under free disk space, free temp space and other options available
+
+Adding Slave 2 in Jenkins dashboard
+Jenkins dashboard ----> Build executor status (left pane bottom) ----> Currently you will "Built-in node" which means it is a MASTER node ----> Click on "New Node" ----> Node name: slave2, Type: Permanent Agent ----> Create ----> Name: slave2 ----> Description: This is Slave 2 ----> No. of executors: 3 (this is to run number of builds parallelly) ----> Remote root directory: /tmp (In this path of slave nodes, the builds will be stored) ----> Labels: slave2 (This label name is very important because this label name is the same name we should configure in the pipeline script. Based on this only, the job will get execute on whichever worker node we want) ----> Usage: Only build jobs with label expressions matching this node ----> Launch method: Launch agents via SSH ----> Host: <PrivateIPofSlave2> ----> Credentials: From the dropdown, select "ec2-user" (Since both slave nodes have same pem file, we can directly use the existing credentials. If its a different pem file, we have to follow the process as we have followed in Slave 1) ----> Host key verification strategy: Non verifying verification strategy ----> Availability: Keep this agent online as much as possible ----> Save ----> You can see Slave2 got added. Just refresh, you will see the values under free disk space, free temp space and other options available
+
+This is the configuration of master and slave
+
+*********
+Step 5
+*********
+Creation of PIPELINE Job
+Repo URL:  https://github.com/KastroVKiran/Hotstar-App.git (Hotstar App)
+
+New item ---> Name: Pipeline-Job ---> Pipeline ---> Create ---> Pipeline (left pane) ---> Keep the below script;
+#Jenkins File For HOSTAR App - Jenkins Master and Slave Concept
+#Pipeline 1 - without Tomcat integration
+
+pipeline {
+    agent {
+        label 'slave1'
+    }
+
+    stages {
+        stage('Clone the Code') {
+            steps {
+                git '<Repo URL>'
+            }
+        }
+        stage('Maven Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('Maven Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Maven Package') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Deployment') {
+            steps {
+                echo 'Deployment Completed'
+            }
+        }
+    }
+}
+
+The job will be successfully built.
+Now i want to do the deployment in Tomcat server.
+
+
+*********
+Step 6
+*********
+Lets launch one server for tomcat and then we will do the final deployment.
+Launch Amazon Linux 2 AMI, t2.micro, Name: Tomcat Server
+Connect to Tomcat VM and setup tomcat as discussed in previous sessions
+
+*********
+Step 7
+*********
+Install 'deploy to container' and 'pipeline stage view' plugins in Jenkins 
+
+Lets configure Tomcat credentials in Jenkins
+Manage Jenkins ----> Security ----> Credentials ----> Click on 'global' under 'Stores scoped to jenkins' ----> Add credentials ----> Kind: Username with password, Scope: Global, Username: tomcat, Password: tomcat, ID: tomcat-creds, Description: tomcat-creds ----> Create
+
+For the generation of script for 'Deployment' stage ----> Open job ----> Generate pipeline syntax ----> Sample step: deploy: Deploy war/ear to a container ----> WAR/EAR files: **/*.war ----> Context path: HotstarApp ----> Add containers: Tomcat 9.x Remote ----> Credentials: Select 'tomcat-creds' from dropdown ----> Tomcat URL: Provide the tomcat url upto 8080/ ----> Generate pipeline script ----> Copy the script
+
+Sample Script Generated: 
+deploy adapters: [tomcat9(credentialsId: 'tomcatcreds', path: '', url: 'http://43.205.237.189:8080')], contextPath: 'myapp', war: '**/*.war'
+
+Paste the above script in the below pipeline at 'Deployment' stage ---> Apply ----> Save ----> Build now
+
+#Jenkins File For HOSTAR App - Jenkins Master and Slave Concept
+#Pipeline 2 - with Tomcat integration
+pipeline {
+    agent {
+        label 'slave1'
+    }
+
+    stages {
+        stage('Clone the Code') {
+            steps {
+                git '<Repo URL>'
+            }
+        }
+        stage('Maven Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('Maven Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Maven Package') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Deployment') {
+            steps {
+                deploy adapters: [tomcat9(credentialsId: 'tomcatcreds', path: '', url: 'http://43.205.237.189:8080')], contextPath: 'myapp', war: '**/*.war'
+            }
+        }
+    }
+}
+
+----> Build will be success ---> Goto tomcat dashboard and reload ----> You will see 'HotstarApp' ----> Click on it, you will see the app.
+
+Goto console output and check where the job is executed.
+
+
+=> Jenkins RBAC
+RBAC - Roll Based Account/Access Control
+
+AWS - Root user (root email id and password)			- Administrator access
+	 - IAM user (iam user id and iam user password)		- Limited permissions (only S3 permissions..)
+
+Jenkins Admin (root username and password) - Administrator access
+Jenkins Users - Limited permissions (create the job, configure the job, install plugins, setup 											credentials)
+
+To see the list of users --- /var/lib/jenkins/users ----> ls ----> users.xml file
+
+SonarQube Github Repo: https://github.com/KastroVKiran/SonarQube-Project-Kastro.git
+SonarQube Video: https://www.youtube.com/watch?v=ScdedztTaAU&t=3s&pp=ygU1c29uYXJxdWJlIGluIGRldm9wcyB2aWRlb3MgcGxheWxpc3QgbGVhcm4gd2l0aCBrYXN0cm8%3D
