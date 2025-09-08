@@ -73,7 +73,7 @@ JOB 1 - Freestyle (Jenkins Parameters)
 "This project is parameterized"
 Parameters are used to pass variables in key-value pairs during the build
 
-Name = Kastro
+Name = pj
 Age = X
 Gender = Male
 
@@ -81,9 +81,9 @@ x
 y
 z
 
-My Name is Kastro, I'm DevOps Engineer
-Execute shell ----> echo "My Name is Kastro, I'm DevOps Engineer"
-echo "My Name is Kiran, I'm DevOps Trainer
+My Name is pj, I'm DevOps Engineer
+Execute shell ----> echo "My Name is pj, I'm DevOps Engineer"
+echo "My Name is pj, I'm DevOps Trainer
 
 
 (a) String Parameter
@@ -116,9 +116,9 @@ copy the code and paste in password section
 
 Use SSL
 SMTP Port = 465
-Test configuration by sending test e-mail --> kastrokiran@gmail.com --> Test Configuration
+Test configuration by sending test e-mail --> pj013525@gmail.com --> Test Configuration
 
-Edit the job -> Configuration --> Post-build Actions --> Recipients = kastrokiran@gmail.com
+Edit the job -> Configuration --> Post-build Actions --> Recipients = pj013525@gmail.com
 And Fail the job to get email
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Job 3 - Webhook Concept
@@ -186,7 +186,7 @@ JENKINS + GITHUB + MAVEN + TOMCAT - Integration
 ------------------------------------------------------------------------------------------
 
 
-GitHub: https://github.com/KastroVKiran/maven-app-1.git
+GitHub: https://github.com/pj013525/maven-app-1.git
 Tasks:
 ---------------
 ========
@@ -390,3 +390,4 @@ This is called Continuous Integration and Continuous Deployment
 Do again some changes in repo. and look for changes in app browser tab
 
 Configure GitHub Webhook as well
+
